@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul,ol{
+				list-style: none;
+			}
+			.topbox{
+				position:relative;
+				width:771px;
+				height:245px;
+				overflow: hidden;
+			}
+			ul{
+				position: relative;
+			}
+			ul li{
+				position:absolute;
+				left:0;
+				top:0
+			}
+		   ol{
+            position: absolute;
+            right: 0;
+            bottom: 9px;
+            width: 300px;
+        }
+        ol li{
+            float: left;
+            width: 26px;
+            height: 26px;
+            margin: 0 5px;
+            text-align: center;
+            border-radius: 50%;
+            cursor: default;
+            background: url("images/navbg.png") -35px 0 no-repeat;
+        }
+        ol li a{
+        	color:#fff;
+        	font-size: 10px;
+        	text-decoration: none;
+        }
+        ol li.current{
+           background: url("images/navbg.png") 0 0 no-repeat;
+        }
+		</style>
+	</head>
+	<body>
+		<div class="topbox">
+			<ul>
+				<li style="z-index:8;"><img src="images/img049.jpg" alt="" /></li>
+				<li style="z-index:7;"><img src="images/img050.jpg" alt="" /></li>
+				<li style="z-index:6;"><img src="images/img051.jpg" alt="" /></li>
+				<li style="z-index:5;"><img src="images/img052.jpg" alt="" /></li>
+				<li style="z-index:4;"><img src="images/img053.jpg" alt="" /></li>
+				<li style="z-index:3;"><img src="images/img054.jpg" alt="" /></li>
+				<li style="z-index:2;"><img src="images/img055.jpg" alt="" /></li>
+				<li style="z-index:1;"><img src="images/img056.jpg" alt="" /></li>
+			</ul>
+			<ol style="z-index:10;">
+				<li class="current"><a href="javascript:;">1</a></li>
+				<li><a href="javascript:;">2</a></li>
+				<li><a href="javascript:;">3</a></li>
+				<li><a href="javascript:;">4</a></li>
+				<li><a href="javascript:;">5</a></li>
+				<li><a href="javascript:;">6</a></li>
+				<li><a href="javascript:;">7</a></li>
+				<li><a href="javascript:;">8</a></li>
+			</ol>
+		</div>
+	</body>
+</html>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script>
+	var timer=setInterval(autoplay,3000);
+	var $ullist=$("ul li");
+	var $ollist=$("ol li");
+	var index=0;
+	function autoplay(){
+		index++;
+		if(index==$ollist.size()){
+			index=0;
+		}
+		$ollist.eq(index).addClass("current").siblings().removeClass("current");
+		$ullist.eq(index).fadeIn(1000).siblings().fadeOut(1000);
+	}
+	function close(){
+		clearInterval(timer);
+		$ollist.eq($(this).index()).addClass("current").siblings().removeClass("current");
+		$ullist.eq($(this).index()).fadeIn(500).siblings().fadeOut(500);
+	}
+	function open(){
+		timer=setInterval(autoplay,3000);
+		index=$(this).index();
+		$ollist.eq(index).addClass("current").siblings().removeClass("current");
+		$ullist.eq(index).fadeIn(500).siblings().fadeOut(500);
+	}
+//	$ollist.mousedown(close)
+//	$ollist.mouseup(open)
+	$ollist.mouseover(close)
+	$ollist.mouseout(open)
+</script>
